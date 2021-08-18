@@ -19,3 +19,5 @@
       bond-miimon 100
       bond-lacp-rate 1
       bond-slaves ens2f0 ens2f1
+      
+ # /etc/init.d/networking restart

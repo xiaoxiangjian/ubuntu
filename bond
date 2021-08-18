@@ -1,0 +1,21 @@
+# modprobe bonding
+# cat /etc/network/interfaces
+
+  auto ens2f0
+  iface ens2f0 inet manual
+      bond-master bond0
+  auto ens2f1
+  iface ens2f1 inet manual
+      bond-master bond0
+
+  auto bond0
+  iface bond0 inet dhcp
+  iface bond0 inet6 dhcp
+      pre-up ifconfig bond0 hw ether xx:xx:xx:xx:xx:xx
+  #   address 192.168.1.10
+  #   gateway 192.168.1.1
+  #   netmask 255.255.255.0
+      bond-mode 4
+      bond-miimon 100
+      bond-lacp-rate 1
+      bond-slaves ens2f0 ens2f1

@@ -1,4 +1,18 @@
-# modprobe bonding
+##### check ifenslave
+```shell
+dpkg -l | grep ifenslave
+```
+##### load bonding module
+```shell
+modprobe bonding
+```
+##### auto load bonding on startup
+```shell
+# echo bonding >>/etc/modules
+```
+
+##### add bond
+```shell
 # cat /etc/network/interfaces
 
   auto ens2f0
@@ -21,3 +35,4 @@
       bond-slaves ens2f0 ens2f1
       
  # /etc/init.d/networking restart
+```

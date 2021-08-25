@@ -1,17 +1,19 @@
-##### check ifenslave
+> ironic env, BM bond to MLAG Leaf 
+
+##### 1 check ifenslave package
 ```shell
 dpkg -l | grep ifenslave
 ```
-##### load bonding module
+##### 2 load bonding module
 ```shell
 modprobe bonding
 ```
-##### auto load bonding on startup
+##### 3 set auto load bonding module on startup
 ```shell
 # echo bonding >>/etc/modules
 ```
 
-##### add bond
+##### 4 create bond
 ```shell
 # cat /etc/network/interfaces
 
@@ -24,15 +26,16 @@ modprobe bonding
 
   auto bond0
   iface bond0 inet dhcp
-  iface bond0 inet6 dhcp
-      pre-up ifconfig bond0 hw ether xx:xx:xx:xx:xx:xx
+      pre-up ifconfig bond0 hw ether xx:xx:xx:xx:xx:xx # same with ironic port-group OR vport mac on SE-DC
   #   address 192.168.1.10
   #   gateway 192.168.1.1
   #   netmask 255.255.255.0
       bond-mode 4
       bond-miimon 100
-      bond-lacp-rate 1
+      bond-lacp-rate 1 # lacp short period,flags on device side: ABCDEF
+  #   bond-lacp-rate 1 # comment,lacp long period,flags on device side: ACDEF
       bond-slaves ens2f0 ens2f1
+   iface bond0 inet6 dhcp
       
- # /etc/init.d/networking restart
 ```
+##### 5 reboot host

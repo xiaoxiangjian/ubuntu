@@ -2,11 +2,11 @@
 
 ##### 1 check ifenslave package
 ```shell
-dpkg -l | grep ifenslave
+# dpkg -l | grep ifenslave
 ```
 ##### 2 load bonding module
 ```shell
-modprobe bonding
+# modprobe bonding
 ```
 ##### 3 set auto load bonding module on startup
 ```shell
@@ -39,3 +39,6 @@ modprobe bonding
       
 ```
 ##### 5 reboot host
+```shell
+# reboot
+```
